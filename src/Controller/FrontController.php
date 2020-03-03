@@ -13,7 +13,8 @@ class FrontController extends AbstractController
      */
     public function index(Documentation $documentation)
     {
-        $content = $documentation->getContents();
+        $content = $documentation->getRstFiles();
+        dd($content);
         return $this->render('front/index.html.twig', [
             'content' => $content
         ]);
