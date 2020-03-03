@@ -1,3 +1,5 @@
+[![Maintainability](https://api.codeclimate.com/v1/badges/624df6c1f0ae50e60714/maintainability)](https://codeclimate.com/github/abdounikarim/documentation-checker/maintainability)
+
 # Documentation Checker 
 
 ### Installation
