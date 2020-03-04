@@ -27,12 +27,12 @@ class FrontController extends AbstractController
     public function LinksList(Link $links, Documentation $documentation)
     {
         $content = $documentation->getRstFiles();
-        //decode
-        $fileContent = base64_decode($content);
-        $links->searchLinkInContent($fileContent);
-        //dd($links);
+        //dd($content);
+        $dataLink = $links->searchLinkInContent($content);
+        dd($dataLink);
+
         return $this->render('front/links.html.twig', [
-            'links' => $links
+            'links' => $dataLink,
         ]);
     }
 

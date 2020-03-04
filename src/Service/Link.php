@@ -9,6 +9,9 @@
 namespace App\Service;
 
 use Symfony\Component\HttpClient\HttpClient;
+use Symfony\Component\HttpClient\ScopingHttpClient;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 
 class Link
@@ -21,21 +24,33 @@ class Link
         $this->documentation = $documentation;
     }
 
+    /*
+    * Search Intern Links
+    */
     public function searchLinkInContent($content)
     {
-        preg_match('#https://[a-z0-9._/-]', $content, $result, PREG_OFFSET_CAPTURE);
-
-        /* Search HTTP link with regex */
-        dd($result);
-        return $result;
+        /* Search HTTP & HTTPS  link with regex */
+        $fileContent = base64_decode($content['content']);
+        dump($fileContent);
+        preg_match_all("#(https?://)([\w\d.&:\#@%/;$~_?\+-=]*)#",$fileContent, $out);
+        dd($out[0]);
     }
 
-    public function TestResponseInLinks($links)
+    /*
+     * Test Intern Links
+     */
+    public function checkExternalLinks($links)
     {
+        $links = $this->searchLinkInContent();
         foreach($links as $link){
-            $client = HttpClient::create();
-            $response = $client->request('GET', $link);
-            $linkStatus = $response->getStatusCode();
+
+            $response = $this->request('GET', $link);
+            $linkStatus = $response->setStatusCode(Response::HTTP_OK);
+
+            $finalResult = array(
+                $link => $linkStatus,
+            );
+            return $finalResult;
         }
     }
 }
