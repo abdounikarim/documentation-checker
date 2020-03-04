@@ -14,6 +14,8 @@ use Symfony\Component\HttpClient\HttpClient;
 class Link
 {
 
+    private $documentation;
+
     public function __construct(Documentation $documentation)
     {
         $this->documentation = $documentation;
@@ -25,6 +27,7 @@ class Link
 
         /* Search HTTP link with regex */
         dd($result);
+        return $result;
     }
 
     public function TestResponseInLinks($links)
