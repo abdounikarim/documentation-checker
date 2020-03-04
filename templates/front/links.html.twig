@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Documentation checker{% endblock %}
+
+{% block body %}
+    <h1> alls links in Symfony Docs</h1>
+    <ul>
+        {% for link in links %}
+            <li>{{ link }} {# TODO: display a state of link #} </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

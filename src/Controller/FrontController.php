@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Service\Documentation;
+use App\Service\Link;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -19,4 +20,19 @@ class FrontController extends AbstractController
             'content' => $content
         ]);
     }
+
+    /**
+     * @Route("/links", name="links")
+     */
+    public function LinksList(Link $links, Documentation $documentation)
+    {
+        $content = $documentation->getRstFiles();
+        $links->searchLinkInContent($content);
+        dd($content);
+        return $this->render('front/links.html.twig', [
+            'links' => $links
+        ]);
+    }
+
+
 }
