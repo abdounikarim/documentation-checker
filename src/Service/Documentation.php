@@ -62,6 +62,6 @@ class Documentation
     public function getContent($file)
     {
         $response = $this->checkConnection()->request('GET', $file['url']);
-        dd($response->toArray());
+        dump($response->toArray());
     }
 }
