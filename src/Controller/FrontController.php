@@ -30,15 +30,23 @@ class FrontController extends AbstractController
         //dd($content);
 
         $dataLink = $links->searchLinkInContent($content);
-        $statusCodeLink = $links->checkExternalLinks($dataLink);
+        $links = $links->checkExternalLinks($dataLink);
+        //dump($dataLink);
+        //dd($links);
 
-
-        dump($dataLink);
-        dump($statusCodeLink);
+        $count = count($links['link']);
 
         return $this->render('front/links.html.twig', [
-            'links' => $dataLink,
+            'links' => $links,
+            'count' => $count,
         ]);
+
+        /*
+        return $this->render('front/links.html.twig', [
+            'links' => $dataLink,
+            'statusCode' => $statusCodeLink
+        ]);
+        */
     }
 
 

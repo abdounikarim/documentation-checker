@@ -17,6 +17,8 @@ use Symfony\Component\HttpFoundation\Response;
 class Link
 {
 
+    private $connection;
+
     private $documentation;
 
     public function __construct(Documentation $documentation)
@@ -30,9 +32,22 @@ class Link
     public function searchLinkInContent($content)
     {
         $fileContent = base64_decode($content['content']);
-        dump($fileContent);
         preg_match_all("#(https?://)([\w\d.&:\#@%/;$~_?\+-=]*)#",$fileContent, $out);
         return $out[0];
+    }
+
+    protected function checkConnection()
+    {
+        if($this->connection) {
+            return $this->connection;
+        }
+        return $this->connect();
+    }
+
+    private function connect()
+    {
+        $this->connection = HttpClient::create();
+        return $this->connection;
     }
 
     /*
@@ -40,16 +55,23 @@ class Link
      */
     public function checkExternalLinks($links)
     {
+        dump($links);
+        $finalResult = array("link"  => array (),"code"  =>array() );
+        $i = 0;
         foreach($links as $link){
-            /*
-            $response = $this->request('GET', $link);
-            $linkStatus = $response->setStatusCode(Response::HTTP_OK);
+            $i = $i + 1;
+            $this->connection = HttpClient::create();
+            $response = $this->checkConnection()->request('GET', $link);
+            $linkStatus = $response->getStatusCode();
 
-            $finalResult = array(
-                $link => $linkStatus,
-            );
-            return $finalResult;
-            */
+
+            array_push($finalResult['link'],$link);
+            array_push($finalResult['code'],$linkStatus);
+
+
+            // array_push($finalResult['link'], $link, $linkStatus);
         }
+        //dd($finalResult);
+        return $finalResult;
     }
 }

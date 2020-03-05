@@ -9,6 +9,7 @@
     <br/>
 
     <section> <h3 class="text-center"> { display section page } </h3></section>
+    <br/>
 
     <table class="table">
         <thead class="thead-dark">
@@ -18,12 +19,17 @@
         </tr>
         </thead>
         <tbody>
-            {% for link in links %}
+
+        {% for i in 0..count - 1 %}
             <tr>
-                <th>{{ link }} {# TODO: display a state of link #} </th>
-                <td>{Display statusCode}</td>
+                    <th>{{ links['link'][i] }} {# TODO: display a state of link #} </th>
+                    <td>{{ links['code'][i] }} </td>
             </tr>
-            {% endfor %}
+        {% endfor %}
+
+
+
+
 
         </tbody>
     </table>
