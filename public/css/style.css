@@ -1,0 +1,18 @@
+/*
+Description : CSS sheet for style of front application
+Date : 05/03/2020
+ */
+
+
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Lato';
+}
+
+.404{
+    color: red;
+}
+.200{
+    color: darkgreen;
+}

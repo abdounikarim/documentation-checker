@@ -3,11 +3,40 @@
 {% block title %}Documentation checker{% endblock %}
 
 {% block body %}
-    <h1> alls links in Symfony Docs</h1>
+    <br/><br/>
+    <h1 class="text-center"> Links in SymfonyDocs</h1>
+    <br/>
+    <br/>
+
+    <section> <h3 class="text-center"> { display section page } </h3></section>
+
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Links</th>
+            <th scope="col" class="404">StatusCode</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for link in links %}
+            <tr>
+                <th>{{ link }} {# TODO: display a state of link #} </th>
+                <td>{Display statusCode}</td>
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+
+
+    <section> <h3 class="text-center"> { display other rst file } </h3></section>
+
+    <!--
     <ul>
-        {% for link in links %}
-            <li>{{ link }} {# TODO: display a state of link #} </li>
-        {% endfor %}
+        { % for link in links %}
+            <li>{ { link }} {# TODO: display a state of link #} </li>
+        { % endfor %}
     </ul>
+    -->
 
 {% endblock %}

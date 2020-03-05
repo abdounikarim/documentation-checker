@@ -29,11 +29,10 @@ class Link
     */
     public function searchLinkInContent($content)
     {
-        /* Search HTTP & HTTPS  link with regex */
         $fileContent = base64_decode($content['content']);
         dump($fileContent);
         preg_match_all("#(https?://)([\w\d.&:\#@%/;$~_?\+-=]*)#",$fileContent, $out);
-        dd($out[0]);
+        return $out[0];
     }
 
     /*
@@ -41,9 +40,8 @@ class Link
      */
     public function checkExternalLinks($links)
     {
-        $links = $this->searchLinkInContent();
         foreach($links as $link){
-
+            /*
             $response = $this->request('GET', $link);
             $linkStatus = $response->setStatusCode(Response::HTTP_OK);
 
@@ -51,6 +49,7 @@ class Link
                 $link => $linkStatus,
             );
             return $finalResult;
+            */
         }
     }
 }

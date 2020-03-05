@@ -28,8 +28,13 @@ class FrontController extends AbstractController
     {
         $content = $documentation->getRstFiles();
         //dd($content);
+
         $dataLink = $links->searchLinkInContent($content);
-        dd($dataLink);
+        $statusCodeLink = $links->checkExternalLinks($dataLink);
+
+
+        dump($dataLink);
+        dump($statusCodeLink);
 
         return $this->render('front/links.html.twig', [
             'links' => $dataLink,
