@@ -12,6 +12,7 @@ use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpClient\ScopingHttpClient;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 
 class Link
@@ -62,6 +63,7 @@ class Link
             $i = $i + 1;
             $this->connection = HttpClient::create();
             $response = $this->checkConnection()->request('GET', $link);
+            //throw new NotFoundHttpException();
             $linkStatus = $response->getStatusCode();
 
 

@@ -30,10 +30,8 @@ class FrontController extends AbstractController
         //dd($content);
 
         $dataLink = $links->searchLinkInContent($content);
+        //array_push($dataLink,'https://URLdeTEST404.com');
         $links = $links->checkExternalLinks($dataLink);
-        //dump($dataLink);
-        //dd($links);
-
         $count = count($links['link']);
 
         return $this->render('front/links.html.twig', [

@@ -3,46 +3,88 @@
 {% block title %}Documentation checker{% endblock %}
 
 {% block body %}
-    <br/><br/>
-    <h1 class="text-center"> Links in SymfonyDocs</h1>
-    <br/>
-    <br/>
+    <div class="container">
+        <br/><br/>
+        <h1 class="text-center"> Links in SymfonyDocs</h1>
+        <br/>
+        <br/>
 
-    <section> <h3 class="text-center"> { display section page } </h3></section>
-    <br/>
+        <section> <h3 class="text-center"> { display section page } </h3></section>
+        <br/>
 
-    <table class="table">
-        <thead class="thead-dark">
-        <tr>
-            <th scope="col">Links</th>
-            <th scope="col" class="404">StatusCode</th>
-        </tr>
-        </thead>
-        <tbody>
+        <h5 class="text-center"> Broken links </h5>
+        <div class="row align-items-center">
+            <div class="col-lg-10 offset-lg-1">
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Links</th>
+                        <th scope="col">StatusCode</th>
+                    </tr>
+                    </thead>
+                    <tbody>
 
-        {% for i in 0..count - 1 %}
-            <tr>
-                    <th>{{ links['link'][i] }} {# TODO: display a state of link #} </th>
-                    <td>{{ links['code'][i] }} </td>
-            </tr>
-        {% endfor %}
+                    {% set n = 0 %}
+                    {% for i in 0..count - 1 %}
+
+                        <tr>
+                            {% if links['code'][i] == '404' %}
+                                {% set n = n + 1 %}
+                                <th>{{ links['link'][i] }} {# TODO: display a state of link #} </th>
+                                <td class="404 text-danger">{{ links['code'][i] }} </td>
+                            {% endif %}
+
+                            {% if n == 0 %}
+                                <td class="text-sucess"> No broken Links </td>
+                                {% set n = n + 1 %}
+                            {% endif %}
+
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br/><br/><br/><br/>
+
+        <h5 class="text-center"> Broken links </h5>
+        <div class="row align-items-center">
+            <div class="col-lg-10 offset-lg-1">
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Links</th>
+                    <th scope="col">StatusCode</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for i in 0..count - 1 %}
+                    <tr>
+                            <th>{{ links['link'][i] }} {# TODO: display a state of link #} </th>
+
+                        {% if links['code'][i] == '404' %}
+                            <td class="404 text-danger">{{ links['code'][i] }} </td>
+                        {% else %}
+                            <td class="200 text-success ">{{ links['code'][i] }} </td>
+                        {% endif %}
+
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            </div>
+        </div>
 
 
+        <section> <h3 class="text-center"> { display other rst file } </h3></section>
 
-
-
-        </tbody>
-    </table>
-
-
-    <section> <h3 class="text-center"> { display other rst file } </h3></section>
-
-    <!--
-    <ul>
-        { % for link in links %}
-            <li>{ { link }} {# TODO: display a state of link #} </li>
-        { % endfor %}
-    </ul>
-    -->
-
+        <!--
+        <ul>
+            { % for link in links %}
+                <li>{ { link }} {# TODO: display a state of link #} </li>
+            { % endfor %}
+        </ul>
+        -->
+    </div>
 {% endblock %}
