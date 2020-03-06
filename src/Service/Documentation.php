@@ -54,14 +54,15 @@ class Documentation
             $length = strlen($file['name']);
             $extension = substr($file['name'], $length - 3);
             if($extension === 'rst') {
-                $this->getContent($file);
+                return $this->getContent($file);
             }
+            //if extension === folder... (reloop  )
         }
     }
 
     public function getContent($file)
     {
         $response = $this->checkConnection()->request('GET', $file['url']);
-        dd($response->toArray());
+        return $response->toArray();
     }
 }
