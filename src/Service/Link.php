@@ -51,6 +51,32 @@ class Link
         return $this->connection;
     }
 
+    private function checkUrlCurl($link)
+    {
+        // initialisation de la session
+        $ch = curl_init();
+
+        // configuration des options
+        curl_setopt($ch, CURLOPT_URL, $link);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+
+        // exécution de la session
+        curl_exec($ch);
+
+        $output = curl_exec($ch);
+        //dd(curl_error($ch));
+        $code = curl_getinfo($ch,CURLINFO_HTTP_CODE);
+
+        //dd($code);
+        // fermeture des ressources
+        curl_close($ch);
+        return $code;
+
+    }
+
     /*
      * Test Intern Links
      */
@@ -61,16 +87,16 @@ class Link
         $i = 0;
         foreach($links as $link){
             $i = $i + 1;
-            $this->connection = HttpClient::create();
-            $response = $this->checkConnection()->request('GET', $link);
-            //throw new NotFoundHttpException();
-            $linkStatus = $response->getStatusCode();
+
+            //$response = $this->checkConnection()->request('GET', $link);
+
+            $linkStatus = $this->checkUrlCurl($link);
 
 
             array_push($finalResult['link'],$link);
             array_push($finalResult['code'],$linkStatus);
 
-
+            //dump($finalResult['code']);
             // array_push($finalResult['link'], $link, $linkStatus);
         }
         //dd($finalResult);

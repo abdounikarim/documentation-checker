@@ -30,7 +30,8 @@ class FrontController extends AbstractController
         //dd($content);
 
         $dataLink = $links->searchLinkInContent($content);
-        //array_push($dataLink,'https://URLdeTEST404.com');
+        array_push($dataLink,'https://URLdeTEST404.com');
+        //dd($dataLink);
         $links = $links->checkExternalLinks($dataLink);
         $count = count($links['link']);
 

@@ -24,18 +24,18 @@
                     </thead>
                     <tbody>
 
-                    {% set n = 0 %}
+                    {% set n = 1 %}
                     {% for i in 0..count - 1 %}
 
                         <tr>
-                            {% if links['code'][i] == '404' %}
+                            {% if links['code'][i] == '404' or links['code'][i] == '0' %}
                                 {% set n = n + 1 %}
                                 <th>{{ links['link'][i] }} {# TODO: display a state of link #} </th>
-                                <td class="404 text-danger">{{ links['code'][i] }} </td>
+                                <td class="404 text-danger"> 404 </td>
                             {% endif %}
 
                             {% if n == 0 %}
-                                <td class="text-sucess"> No broken Links </td>
+                                <td class="200 text-sucess"> No broken Links </td>
                                 {% set n = n + 1 %}
                             {% endif %}
 
@@ -47,7 +47,7 @@
         </div>
         <br/><br/><br/><br/>
 
-        <h5 class="text-center"> Broken links </h5>
+        <h5 class="text-center"> Alls Links </h5>
         <div class="row align-items-center">
             <div class="col-lg-10 offset-lg-1">
             <table class="table">
@@ -63,8 +63,8 @@
                     <tr>
                             <th>{{ links['link'][i] }} {# TODO: display a state of link #} </th>
 
-                        {% if links['code'][i] == '404' %}
-                            <td class="404 text-danger">{{ links['code'][i] }} </td>
+                        {% if links['code'][i] == '404' or links['code'][i] == '0' %}
+                            <td class="404 text-danger">404 (listed) </td>
                         {% else %}
                             <td class="200 text-success ">{{ links['code'][i] }} </td>
                         {% endif %}
